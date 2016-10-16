@@ -33,11 +33,10 @@ function payloadProcessor (payload, done) {
     payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
     delete payload.data;
     delete payload.record.id;
-    console.log(payload.record);
 
     request.post({
       url: 'https://api.fulcrumapp.com/api/v2/records.json',
-      form: payload.record,
+      data: payload.record,
       headers: { 
         'Content-Type': 'application/json',
         'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
@@ -51,7 +50,7 @@ function payloadProcessor (payload, done) {
     });
   }
 
-  // function updateNSWRecord() {
+  function updateNSWRecord() {
   //   payload.record = payload.data;
   //   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   //   payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
@@ -83,9 +82,9 @@ function payloadProcessor (payload, done) {
   //   };
     
   //   var recordJSON = request.put(url, options);
-  // }
+  }
 
-  // function deleteNSWRecord() {
+  function deleteNSWRecord() {
   //   //make sure table name, dataname in receiving app, and form_values key are correct (next line).
   //   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
   //   var url = "https://api.fulcrumapp.com/api/v2/query/?format=json&q=" + query;
@@ -109,16 +108,16 @@ function payloadProcessor (payload, done) {
   //   };
     
   //   var recordJSON = request.delete(url, options);
-  // }
+  }
 
-  // function createFireRecord() {
+  function createFireRecord() {
   //   payload.record = payload.data;
   //   payload.record.form_id = "7989a430-3ef5-4fe4-94b9-c3f958c31db0";
   //   //Make sure originating app has a `RECORDID()` calculated field and receiving has a TextField with dataname matching value after `WHERE` on line 50.
   //   //in the line after this, `record_id` field of receiving app = the one created in originating.
   //   payload.record.form_values["88d3"] = payload.record.form_values["05e2"];
   //   delete payload.data;
-  //   delete payload.record.id;
+  //   delete payload.record.iQad;
     
   //   var url = "https://api.fulcrumapp.com/api/v2/records.json";
   //   var options = {
@@ -131,7 +130,7 @@ function payloadProcessor (payload, done) {
   //   };
     
   //   var recordJSON = reuest.post(url, options);
-  // }
+  }
 
   // function updateFireRecord() {
   //   payload.record = payload.data;
