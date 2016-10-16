@@ -34,19 +34,16 @@ function payloadProcessor (payload, done) {
     delete payload.data;
     delete payload.record.id;
 
-    request.post({
+    request({
+      method: 'POST',
       url: 'https://api.fulcrumapp.com/api/v2/records.json',
-      data: payload.record,
-      headers: { 
-        'Content-Type': 'application/json',
+      json: payload.record,
+      headers: {
         'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      },
-      json: true
+      }
     },
     function (err, httpResponse, body) {
       console.log(err, body);
-      console.log(payload);
-      console.log(body.typeof);
     });
   }
 
