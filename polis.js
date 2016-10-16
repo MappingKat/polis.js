@@ -46,7 +46,7 @@ function payloadProcessor (payload, done) {
       var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
       console.log(query);
 
-      var json = request({
+      request({
         method: 'GET',
         url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
         headers: {
@@ -86,7 +86,7 @@ function payloadProcessor (payload, done) {
     if (payload.record) {
       var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
       
-      var data = request({
+      request({
         method: 'GET',
         url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
         headers: {
