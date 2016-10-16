@@ -40,6 +40,7 @@ function payloadProcessor (payload, done) {
     payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
     payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
     delete payload.data;
+    var data;
 
     if (payload.record) {
       var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
@@ -54,10 +55,10 @@ function payloadProcessor (payload, done) {
       },
       function (err, httpResponse, body) {
         console.log(err, body);
-      });
+        var data = JSON.parse(body);
 
-      var data = JSON.parse(json);
-      
+      });
+      console.log('DATA', data)
       delete payload.record.id;
       
       request({
@@ -80,6 +81,7 @@ function payloadProcessor (payload, done) {
     payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
     payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
     delete payload.data;
+    var data;
 
     if (payload.record) {
       var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
@@ -93,8 +95,9 @@ function payloadProcessor (payload, done) {
       },
       function (err, httpResponse, body) {
         console.log(err, body);
+        var data = JSON.parse(body);
       });
-      console.log(data);
+      console.log('DATA', data)
 
       request({
         method: 'DELETE',
