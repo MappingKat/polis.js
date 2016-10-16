@@ -74,6 +74,7 @@ function payloadProcessor (payload, done) {
     },
     function (err, httpResponse, body) {
       console.log(err, body);
+      console.log(body.typeof);
     });
   }
 
