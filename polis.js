@@ -99,7 +99,6 @@ function payloadProcessor (payload, done) {
     function (err, httpResponse, body) {
       console.log(err, body);
     });
-    var json = request.fetch(url, options);
     var data = JSON.parse(json);
 
     request({
