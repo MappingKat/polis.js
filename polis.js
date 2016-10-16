@@ -37,7 +37,7 @@ function payloadProcessor (payload, done) {
 
     request.post({
       url: 'https://api.fulcrumapp.com/api/v2/records.json',
-      form: payload.record
+      form: payload.record,
       headers: { 
         'Content-Type': 'application/json',
         'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
