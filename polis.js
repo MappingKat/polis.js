@@ -72,7 +72,7 @@ function payloadProcessor (payload, done) {
       "method": "PUT",
       "contentType": "application/json",
       "dataType": "json",
-      "payload": JSON.stringify(payload.record),
+      "json": JSON.stringify(payload.record),
       "headers": {
         "X-ApiToken": "28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791"
       }
@@ -94,17 +94,18 @@ function payloadProcessor (payload, done) {
     };
     var json = UrlFetchApp.fetch(url, options);
     var data = JSON.parse(json);
-    
-    var url = "https://api.fulcrumapp.com/api/v2/records/" + data.rows[0].fulcrum_id + ".json";
-    var options = {
-      "contentType": "application/json",
-      "dataType": "json",
-      "headers": {
-        "X-ApiToken": "28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791"
+
+    request({
+      method: 'DELETE',
+      url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
+      json: payload.record,
+      headers: {
+        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
       }
-    };
-    
-    var recordJSON = request.delete(url, options);
+    },
+    function (err, httpResponse, body) {
+      console.log(err, body);
+    });
   }
 
   function createFireRecord() {
@@ -116,17 +117,17 @@ function payloadProcessor (payload, done) {
     delete payload.data;
     delete payload.record.iQad;
     
-    var url = "https://api.fulcrumapp.com/api/v2/records.json";
-    var options = {
-      "contentType": "application/json",
-      "dataType": "json",
-      "payload": JSON.stringify(payload.record),
-      "headers": {
-        "X-ApiToken": "1def20f914c43b058ceb04affa255ae587c93047d7908161537513cda3f5d4d611154b41b997b73e"
+    request({
+      method: 'POST',
+      url: 'https://api.fulcrumapp.com/api/v2/records.json',
+      json: payload.record,
+      headers: {
+        'X-ApiToken': '1def20f914c43b058ceb04affa255ae587c93047d7908161537513cda3f5d4d611154b41b997b73e'
       }
-    };
-    
-    var recordJSON = reuest.post(url, options);
+    },
+    function (err, httpResponse, body) {
+      console.log(err, body);
+    });
   }
 
   function updateFireRecord() {
