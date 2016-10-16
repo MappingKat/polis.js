@@ -1,6 +1,6 @@
 var express = require('express');
 var fulcrumMiddleware = require('connect-fulcrum-webhook');
-var request = require("request");
+var request = require('request');
 var PORT = process.env.PORT || 9000;
 var app = express();
 
@@ -33,22 +33,21 @@ function payloadProcessor (payload, done) {
     payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
     delete payload.data;
     delete payload.record.id;
+    console.log(payload.record)
 
-    request({
+    request.post({
       url: 'https://api.fulcrumapp.com/api/v2/records.json',
-      method: 'POST',
-      json: true,
+      form: payload.record
       headers: { 
         'Content-Type': 'application/json',
         'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
       },
-      body: JSON.stringify(payload.record)
-    }, function(error, response, body){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(response.statusCode, body);
-      }
+      json: true
+    },
+    function (err, httpResponse, body) {
+      console.log(err, body);
+      console.log(payload);
+      console.log(body.typeof);
     });
   }
 
@@ -67,7 +66,7 @@ function payloadProcessor (payload, done) {
         "X-ApiToken": "28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791"
       }
     };
-    var json = UrlFetchApp.fetch(url, options);
+    var json = request.get(url, options);
     var data = JSON.parse(json);
     
     delete payload.record.id;
@@ -83,7 +82,7 @@ function payloadProcessor (payload, done) {
       }
     };
     
-    var recordJSON = UrlFetchApp.fetch(url, options);
+    var recordJSON = request.put(url, options);
   }
 
   function deleteNSWRecord() {
@@ -102,7 +101,6 @@ function payloadProcessor (payload, done) {
     
     var url = "https://api.fulcrumapp.com/api/v2/records/" + data.rows[0].fulcrum_id + ".json";
     var options = {
-      "method": "DELETE",
       "contentType": "application/json",
       "dataType": "json",
       "headers": {
@@ -110,7 +108,7 @@ function payloadProcessor (payload, done) {
       }
     };
     
-    var recordJSON = UrlFetchApp.fetch(url, options);
+    var recordJSON = request.delete(url, options);
   }
 
   function createFireRecord() {
@@ -124,7 +122,6 @@ function payloadProcessor (payload, done) {
     
     var url = "https://api.fulcrumapp.com/api/v2/records.json";
     var options = {
-      "method": "POST",
       "contentType": "application/json",
       "dataType": "json",
       "payload": JSON.stringify(payload.record),
@@ -133,7 +130,7 @@ function payloadProcessor (payload, done) {
       }
     };
     
-    var recordJSON = UrlFetchApp.fetch(url, options);
+    var recordJSON = reuest.post(url, options);
   }
 
   function updateFireRecord() {
@@ -210,7 +207,7 @@ var fulcrumMiddlewareConfig = {
 app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
 
 app.get('/', function (req, res) {
-  res.send('<html><head><title>Fulcrum Syncing</title></head><body><h2>Fulcrum Syncing</h2><p>going</p></body></html>');
+  res.send('<html><head><title>NSW Public</title></head><body><h2>Fire Rescue</h2><p>going</p></body></html>');
 })
 
 app.listen(PORT, function () {
