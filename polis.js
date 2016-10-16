@@ -60,7 +60,7 @@ function payloadProcessor (payload, done) {
       function (err, httpResponse, body) {
         console.log(err, body);
       });
-      
+
       var data = JSON.parse(json);
       
       delete payload.record.id;
@@ -81,7 +81,11 @@ function payloadProcessor (payload, done) {
   }
 
   function deleteNSWRecord() {
-    //make sure table name, dataname in receiving app, and form_values key are correct (next line).
+    payload.record = payload.data;
+    payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
+    payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
+    delete payload.data;
+
     var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
     
     request({
