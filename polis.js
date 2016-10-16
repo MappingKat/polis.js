@@ -3,25 +3,21 @@ var fulcrumMiddleware = require('connect-fulcrum-webhook');
 var request = require('request');
 var PORT = process.env.PORT || 9000;
 var app = express();
-// need to add SOURCE field
+
 function payloadProcessor (payload, done) {
-  if (payload.data.form_id){
-    if (payload.data.form_id === "7989a430-3ef5-4fe4-94b9-c3f958c31db0") {
-      if (payload.type === "record.create") {
-        createNSWRecord();
-      } else if (payload.type === "record.update") {
-        updateNSWRecord();
-      } else if (payload.type === "record.delete") {
-        deleteNSWRecord();
-      }
+  if (payload.data.form_id && payload.data.form_id === "7989a430-3ef5-4fe4-94b9-c3f958c31db0"){
+    if (payload.type === "record.create") {
+      createNSWRecord();
+    } else if (payload.type === "record.update") {
+      updateNSWRecord();
+    } else if (payload.type === "record.delete") {
+      deleteNSWRecord();
     }
   }
 
   function createNSWRecord() {
     payload.record = payload.data;
     payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
-    //Make sure originating app has a `RECORDID()` calculated field and receiving has a TextField with dataname matching value after `WHERE` on line 50.
-    //in the line after this, `record_id` field of receiving app = the one created in originating.
     payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
     delete payload.data;
     delete payload.record.id;
@@ -52,7 +48,6 @@ function payloadProcessor (payload, done) {
       var json = request({
         method: 'GET',
         url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
-        json: payload.record,
         headers: {
           'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
         }
@@ -92,7 +87,6 @@ function payloadProcessor (payload, done) {
       var json = request({
         method: 'GET',
         url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
-        json: payload.record,
         headers: {
           'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
         }
