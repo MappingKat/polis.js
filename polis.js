@@ -44,38 +44,38 @@ function updateNSWRecord(payload) {
   delete payload.data;
   var data;
 
-  if (payload.record) {
-    var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
-    console.log(query);
+  // if (payload.record) {
+  //   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
+  //   console.log(query);
 
-    request({
-      method: 'GET',
-      url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log(err, body);
-      var data = JSON.parse(body);
+  //   request({
+  //     method: 'GET',
+  //     url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
+  //     headers: {
+  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+  //     }
+  //   },
+  //   function (err, httpResponse, body) {
+  //     console.log(err, body);
+  //     var data = JSON.parse(body);
 
-    });
-    console.log('DATA', data)
-    delete payload.record.id;
+  //   });
+  //   console.log('DATA', data)
+  //   delete payload.record.id;
     
-    request({
-      method: 'PUT',
-      url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
-      json: payload.record,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log(err, body);
-      console.log(body.typeof);
-    });
-  }
+  //   request({
+  //     method: 'PUT',
+  //     url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
+  //     json: payload.record,
+  //     headers: {
+  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+  //     }
+  //   },
+  //   function (err, httpResponse, body) {
+  //     console.log(err, body);
+  //     console.log(body.typeof);
+  //   });
+  // }
   finish();
 }
 
@@ -84,36 +84,36 @@ function deleteNSWRecord(payload) {
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
   delete payload.data;
-  var data;
-
-  if (payload.record) {
-    var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
+  
+  // if (payload.record) {
+  //   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
     
-    request({
-      method: 'GET',
-      url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log(err, body);
-      var data = JSON.parse(body);
-    });
-    console.log('DATA', data)
+  //   request({
+  //     method: 'GET',
+  //     url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
+  //     headers: {
+  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+  //     }
+  //   },
+  //   function (err, httpResponse, body) {
+  //     console.log(err, body);
+  //     var data = JSON.parse(body);
+  //   });
+  //   console.log('DATA', data)
+  //   console.log(payload);
 
-    request({
-      method: 'DELETE',
-      url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
-      json: payload.record,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log(err, body);
-    });
-  }
+  //   request({
+  //     method: 'DELETE',
+  //     url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
+  //     json: payload.record,
+  //     headers: {
+  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+  //     }
+  //   },
+  //   function (err, httpResponse, body) {
+  //     console.log(err, body);
+  //   });
+  // }
   finish();
 }
 
