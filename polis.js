@@ -65,7 +65,8 @@ function updateNSWRecord(payload, done) {
       }
     },
     function (err, httpResponse, body) {
-      console.log('put', err, body);
+      console.log('PUT', err)
+      console.log('PUT', body);
     });
     done();
   });
@@ -93,14 +94,15 @@ function deleteNSWRecord(payload, done) {
     body = JSON.parse(body);
     request({
       method: 'DELETE',
-      url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows']['fulcrum_id'] + '.json',
+      url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows'][0]['fulcrum_id'] + '.json',
       json: payload.record,
       headers: {
         'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
       }
     },
     function (err, httpResponse, body) {
-      console.log(err, body);
+      console.log('DELETE', body);
+      console.log('DELETE', body);
     });
     done();
   });
