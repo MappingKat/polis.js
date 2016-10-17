@@ -45,6 +45,7 @@ function updateNSWRecord(payload, done) {
   delete payload.data;
   console.log('update', payload);
   console.log(payload.record.form_values['ea7f']);
+  var data;
 
   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values['ea7f'] + "';");
   console.log(query);
@@ -85,6 +86,7 @@ function deleteNSWRecord(payload, done) {
   delete payload.data;
   console.log('delete',payload);
   console.log(payload.record.form_values['ea7f']);
+  var data;
   
   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values['ea7f'] + "';");
     
@@ -100,7 +102,6 @@ function deleteNSWRecord(payload, done) {
     var data = JSON.parse(body);
   });
   console.log('DATA', data)
-  console.log(payload);
 
   //   request({
   //     method: 'DELETE',
