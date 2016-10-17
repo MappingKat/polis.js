@@ -61,6 +61,7 @@ function updateNSWRecord(payload, done) {
   function (err, httpResponse, body) {
     console.log(err, body);
     var data = body;
+    return data;
   });
   console.log('DATA', data);
   delete payload.record.id;
@@ -101,7 +102,8 @@ function deleteNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(err, body);
-    var data = body;
+    var data = JSON.parse(body);
+    return data;
   });
   console.log('DATA', data)
 
