@@ -19,7 +19,7 @@ function payloadProcessor (payload, done) {
 function createNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
-  payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
+  payload.record.form_values["ea7f"] = payload.record.form_values["88d3"];
   delete payload.data;
   delete payload.record.id;
 
@@ -35,15 +35,16 @@ function createNSWRecord(payload, done) {
     console.log(err, body);
   });
   console.log('create',payload);
-  done();
+  done());
 }
 
 function updateNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
-  payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
+  payload.record.form_values["ea7f"] = payload.record.form_values["88d3"];
   delete payload.data;
-  console.log('update',payload);
+  console.log('update', payload);
+  console.log(payload.record.form_values["ea7f"]);
 
   // if (payload.record) {
   //   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
@@ -83,9 +84,10 @@ function updateNSWRecord(payload, done) {
 function deleteNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
-  payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
+  payload.record.form_values["ea7f"] = payload.record.form_values["88d3"];
   delete payload.data;
   console.log('delete',payload);
+  console.log(payload.record.form_values["ea7f"]);
   
   // if (payload.record) {
   //   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values["ea7f"] + "';");
