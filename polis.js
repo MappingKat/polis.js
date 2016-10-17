@@ -60,23 +60,23 @@ function updateNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(err, body);
-    var data = JSON.parse(body);
+    var data = body;
   });
   console.log('DATA', data);
-  //   delete payload.record.id;
+  delete payload.record.id;
     
-  //   request({
-  //     method: 'PUT',
-  //     url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
-  //     json: payload.record,
-  //     headers: {
-  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-  //     }
-  //   },
-  //   function (err, httpResponse, body) {
-  //     console.log(err, body);
-  //     console.log(body.typeof);
-  //   });
+  request({
+    method: 'PUT',
+    url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
+    json: payload.record,
+    headers: {
+      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+    }
+  },
+  function (err, httpResponse, body) {
+    console.log(err, body);
+    console.log(body.typeof);
+  });
   done();
 }
 
@@ -101,21 +101,21 @@ function deleteNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(err, body);
-    var data = JSON.parse(body);
+    var data = body;
   });
   console.log('DATA', data)
 
-  //   request({
-  //     method: 'DELETE',
-  //     url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
-  //     json: payload.record,
-  //     headers: {
-  //       'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-  //     }
-  //   },
-  //   function (err, httpResponse, body) {
-  //     console.log(err, body);
-  //   });
+  request({
+    method: 'DELETE',
+    url: 'https://api.fulcrumapp.com/api/v2/records/' + data.rows[0].fulcrum_id + '.json',
+    json: payload.record,
+    headers: {
+      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+    }
+  },
+  function (err, httpResponse, body) {
+    console.log(err, body);
+  });
   done();
 }
 
