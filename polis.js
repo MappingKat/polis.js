@@ -7,16 +7,16 @@ var app = express();
 function payloadProcessor (payload, done) {
   if (payload.data.form_id && payload.data.form_id === "7989a430-3ef5-4fe4-94b9-c3f958c31db0"){
     if (payload.type === "record.create") {
-      createNSWRecord(payload);
+      createNSWRecord(payload, done);
     } else if (payload.type === "record.update") {
-      updateNSWRecord(payload);
+      updateNSWRecord(payload, done);
     } else if (payload.type === "record.delete") {
-      deleteNSWRecord(payload);
+      deleteNSWRecord(payload, done);
     }
   }
 }
 
-function createNSWRecord(payload) {
+function createNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
@@ -35,10 +35,10 @@ function createNSWRecord(payload) {
     console.log(err, body);
   });
   console.log('create',payload);
-  finish();
+  done();
 }
 
-function updateNSWRecord(payload) {
+function updateNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
@@ -77,10 +77,10 @@ function updateNSWRecord(payload) {
   //     console.log(body.typeof);
   //   });
   // }
-  finish();
+  done();
 }
 
-function deleteNSWRecord(payload) {
+function deleteNSWRecord(payload, done) {
   payload.record = payload.data;
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   payload.record.form_values["88d3"] = payload.record.form_values["ea7f"];
@@ -116,10 +116,6 @@ function deleteNSWRecord(payload) {
   //     console.log(err, body);
   //   });
   // }
-  finish();
-}
-
-function finish(){
   done();
 }
 
