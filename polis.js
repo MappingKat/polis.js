@@ -54,7 +54,8 @@ function updateNSWRecord(payload, done) {
     method: 'GET',
     url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
     headers: {
-      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791',
+      'User-Agent': 'request'
     }
   },
   function (err, httpResponse, body) {
@@ -94,7 +95,8 @@ function deleteNSWRecord(payload, done) {
     method: 'GET',
     url: 'https://api.fulcrumapp.com/api/v2/query/?format=json&q=' + query,
     headers: {
-      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+      'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791',
+      'User-Agent': 'request'
     }
   },
   function (err, httpResponse, body) {
