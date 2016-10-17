@@ -32,9 +32,8 @@ function createNSWRecord(payload, done) {
     }
   },
   function (err, httpResponse, body) {
-    console.log(err, body);
+    console.log('create', err, body);
   });
-  console.log('create',payload);
   done();
 }
 
@@ -43,8 +42,6 @@ function updateNSWRecord(payload, done) {
   payload.record.form_id = 'c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4';
   payload.record.form_values['ea7f'] = payload.record.form_values['88d3'];
   delete payload.data;
-  console.log('update', payload);
-  console.log(payload.record.form_values['ea7f']);
 
   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values['ea7f'] + "';");
 
@@ -58,6 +55,7 @@ function updateNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(httpResponse, body);
+    body = JSON.parse(body);
     request({
       method: 'PUT',
       url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows']['fulcrum_id'] + '.json',
@@ -67,8 +65,7 @@ function updateNSWRecord(payload, done) {
       }
     },
     function (err, httpResponse, body) {
-      console.log(err, body);
-      console.log(body.typeof);
+      console.log('put', err, body);
     });
     done();
   });
@@ -80,8 +77,6 @@ function deleteNSWRecord(payload, done) {
   payload.record.form_id = "c7e35d8e-7bb9-4ee7-a24f-0dcf35b8a6d4";
   payload.record.form_values['ea7f'] = payload.record.form_values['88d3'];
   delete payload.data;
-  console.log('delete',payload);
-  console.log(payload.record.form_values['ea7f']);
   
   var query = encodeURIComponent("SELECT _record_id AS fulcrum_id FROM \"Damage Assessment SYNC\" WHERE fire_rescue_record_id = '" + payload.record.form_values['ea7f'] + "'");
     
@@ -95,6 +90,7 @@ function deleteNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(err, body);
+    body = JSON.parse(body);
     request({
       method: 'DELETE',
       url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows']['fulcrum_id'] + '.json',
