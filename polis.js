@@ -35,7 +35,7 @@ function createNSWRecord(payload, done) {
     console.log(err, body);
   });
   console.log('create',payload);
-  done());
+  done();
 }
 
 function updateNSWRecord(payload, done) {
