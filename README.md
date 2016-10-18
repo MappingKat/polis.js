@@ -1,7 +1,7 @@
-polis.js
+Syncing Records
 ========
 
-Simple Node.js HTTP listener that logs POST contents to STDOUT.
+Simple Node.js HTTP listener that syncs records from one form to another.
 
 Production
 ----------
@@ -11,7 +11,7 @@ Production
 Deploy to Heroku using the following steps:
 
 - Clone this repo
-- `cd polis.js`
+- `cd nsw.js`
 - [Install the Heroku Toolbelt](https://toolbelt.heroku.com/)
 - `heroku login`
 - `heroku create`
@@ -72,7 +72,7 @@ Development
 
 ### Running
 
-`node polis.js`
+`node nsw.js`
 
 A successful startup will show the following output:
 
@@ -118,17 +118,14 @@ listen to: `PORT=<your port number>` To change the default port, modify
 `LISTENING_PORT` in the code.
 
 If you're like me, you'll likely be running another web app, which will be
-listening on $PORT. So when you try to start polis.js, you'll get an error.
+listening on $PORT. So when you try to start nsw.js, you'll get an error.
 You can start it up with a custom port from the command line quite easily,
 though.
 
-`PORT=9000 node polis.js`
+`PORT=9000 node nsw.js`
 
 ### Status Code
 
 The server currently returns a `200` HTTP status code by default. To make the
 server return another status code, simply change `STATUS_CODE` in the code.
 
-# LICENSE
-
-MIT

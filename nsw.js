@@ -57,18 +57,20 @@ function updateNSWRecord(payload, done) {
     console.log(httpResponse, body);
     body = JSON.parse(body);
     console.log(body['rows'][0]['fulcrum_id']);
-    request({
-      method: 'PUT',
-      url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows'][0]['fulcrum_id'] + '.json',
-      json: payload.record,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log('PUT', err)
-      console.log('PUT', body);
-    });
+    if (body['rows'][0] && body['rows'][0]['fulcrum_id']){
+      request({
+        method: 'PUT',
+        url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows'][0]['fulcrum_id'] + '.json',
+        json: payload.record,
+        headers: {
+          'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+        }
+      },
+      function (err, httpResponse, body) {
+        console.log('PUT', err)
+        console.log('PUT', body);
+      });
+    };
     done();
   });
   delete payload.record.id;
@@ -92,20 +94,22 @@ function deleteNSWRecord(payload, done) {
   },
   function (err, httpResponse, body) {
     console.log(err, body);
+    console.log('before', body);
     body = JSON.parse(body);
-    console.log(body['rows'][0]['fulcrum_id']);
-    request({
-      method: 'DELETE',
-      url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows'][0]['fulcrum_id'] + '.json',
-      json: payload.record,
-      headers: {
-        'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
-      }
-    },
-    function (err, httpResponse, body) {
-      console.log('DELETE', body);
-      console.log('DELETE', body);
-    });
+    console.log('after', body);
+    if (body['rows'][0] && body['rows'][0]['fulcrum_id']){
+      request({
+        method: 'DELETE',
+        url: 'https://api.fulcrumapp.com/api/v2/records/' + body['rows'][0]['fulcrum_id'] + '.json',
+        json: payload.record,
+        headers: {
+          'X-ApiToken': '28203c5d15427563dcd0add301508eb4071b46e7c80eb3e7bed72f5d7beb5ad1fa888df0d1ed7791'
+        }
+      },
+      function (err, httpResponse, body) {
+        console.log('DELETE', body);
+      });
+    };
     done();
   });
 
